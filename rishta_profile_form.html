@@ -1,80 +1,97 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rishta Profile Form</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-.wrap { padding: 1rem 0; max-width: 680px; }
-.section { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; }
-.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
-.section-num { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; background: var(--color-background-secondary); align-items: center; justify-content: center; font-size: 10px; color: var(--color-text-secondary); }
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
-.field { display: flex; flex-direction: column; gap: 4px; }
-.field label { font-size: 12px; color: var(--color-text-secondary); }
-.field input, .field select, .field textarea { font-size: 14px; font-family: var(--font-sans); color: var(--color-text-primary); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 7px 10px; outline: none; width: 100%; }
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--color-border-primary); }
-.field textarea { resize: vertical; min-height: 60px; }
-.full { grid-column: 1 / -1; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f0; color: #1a1a1a; min-height: 100vh; padding: 2rem 1rem; }
+  .container { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 1.5rem; color: #1a1a1a; }
+  .section { background: #fff; border: 0.5px solid #e0e0d8; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .section-title { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .section-num { display: inline-flex; width: 18px; height: 18px; border-radius: 50%; background: #f0f0ea; align-items: center; justify-content: center; font-size: 10px; color: #888; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 520px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; color: #888; }
+  .field input, .field select, .field textarea {
+    font-size: 14px; font-family: inherit; color: #1a1a1a;
+    background: #f8f8f4; border: 0.5px solid #e0e0d8;
+    border-radius: 8px; padding: 7px 10px; outline: none; width: 100%;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: #aaa; background: #fff; }
+  .field textarea { resize: vertical; min-height: 60px; }
+  .full { grid-column: 1 / -1; }
 
-/* Photo upload */
-.photo-section { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1.25rem; }
-.photo-circle { width: 80px; height: 80px; border-radius: 50%; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; cursor: pointer; position: relative; }
-.photo-circle img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.photo-icon { font-size: 28px; color: var(--color-text-tertiary); }
-.photo-info { flex: 1; }
-.photo-info p { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 8px; line-height: 1.5; }
-.btn-upload { padding: 7px 14px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 13px; color: var(--color-text-primary); cursor: pointer; }
-.btn-upload:hover { background: var(--color-background-tertiary); }
-.photo-name { font-size: 11px; color: var(--color-text-tertiary); margin-top: 4px; }
+  /* Photo */
+  .photo-section { background: #fff; border: 0.5px solid #e0e0d8; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 1.25rem; }
+  .photo-circle { width: 80px; height: 80px; border-radius: 50%; background: #f0f0ea; border: 0.5px solid #e0e0d8; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; cursor: pointer; font-size: 30px; }
+  .photo-circle img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .photo-info p { font-size: 13px; color: #888; margin-bottom: 8px; line-height: 1.5; }
+  .btn-upload { padding: 7px 14px; background: #f0f0ea; border: 0.5px solid #d8d8d0; border-radius: 8px; font-size: 13px; color: #444; cursor: pointer; }
+  .btn-upload:hover { background: #e8e8e0; }
+  .photo-name { font-size: 11px; color: #bbb; margin-top: 5px; }
 
-/* Job toggle */
-.toggle-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-.toggle-row label { font-size: 13px; color: var(--color-text-secondary); }
-.toggle { position: relative; width: 36px; height: 20px; }
-.toggle input { opacity: 0; width: 0; height: 0; }
-.slider-t { position: absolute; inset: 0; background: var(--color-background-tertiary); border: 0.5px solid var(--color-border-secondary); border-radius: 20px; cursor: pointer; transition: background 0.2s; }
-.slider-t:before { content: ''; position: absolute; width: 14px; height: 14px; left: 2px; top: 2px; background: var(--color-text-tertiary); border-radius: 50%; transition: transform 0.2s, background 0.2s; }
-.toggle input:checked + .slider-t { background: var(--color-background-info); border-color: var(--color-border-info); }
-.toggle input:checked + .slider-t:before { transform: translateX(16px); background: var(--color-text-info); }
+  /* Toggle */
+  .toggle-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .toggle-row span { font-size: 13px; color: #666; cursor: pointer; }
+  .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .slider-t { position: absolute; inset: 0; background: #e0e0d8; border-radius: 20px; cursor: pointer; transition: background 0.2s; }
+  .slider-t:before { content: ''; position: absolute; width: 14px; height: 14px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+  .toggle input:checked + .slider-t { background: #4a7c59; }
+  .toggle input:checked + .slider-t:before { transform: translateX(16px); }
 
-/* Courses */
-.course-list { display: flex; flex-direction: column; gap: 8px; }
-.course-item { display: flex; gap: 8px; align-items: center; }
-.course-item input { flex: 1; font-size: 14px; font-family: var(--font-sans); color: var(--color-text-primary); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 7px 10px; outline: none; }
-.course-item input:focus { border-color: var(--color-border-primary); }
-.btn-remove { width: 28px; height: 28px; border-radius: 50%; background: none; border: 0.5px solid var(--color-border-tertiary); color: var(--color-text-tertiary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; }
-.btn-remove:hover { border-color: var(--color-border-danger); color: var(--color-text-danger); }
-.btn-add { margin-top: 8px; padding: 7px 14px; background: none; border: 0.5px dashed var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 13px; color: var(--color-text-secondary); cursor: pointer; width: 100%; text-align: left; }
-.btn-add:hover { background: var(--color-background-secondary); color: var(--color-text-primary); }
+  /* Courses */
+  .course-list { display: flex; flex-direction: column; gap: 8px; }
+  .course-item { display: flex; gap: 8px; align-items: center; }
+  .course-item input { flex: 1; font-size: 14px; font-family: inherit; color: #1a1a1a; background: #f8f8f4; border: 0.5px solid #e0e0d8; border-radius: 8px; padding: 7px 10px; outline: none; }
+  .course-item input:focus { border-color: #aaa; background: #fff; }
+  .btn-remove { width: 28px; height: 28px; border-radius: 50%; background: none; border: 0.5px solid #e0e0d8; color: #bbb; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1; transition: all 0.15s; }
+  .btn-remove:hover { border-color: #e08080; color: #c0504040; }
+  .btn-add { margin-top: 8px; padding: 7px 14px; background: none; border: 0.5px dashed #ccc; border-radius: 8px; font-size: 13px; color: #888; cursor: pointer; width: 100%; text-align: left; transition: all 0.15s; }
+  .btn-add:hover { background: #f8f8f4; color: #444; }
 
-/* Actions */
-.actions { display: flex; gap: 10px; margin-top: 1rem; }
-.btn-preview { flex: 1; padding: 10px; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 14px; font-weight: 500; color: var(--color-text-primary); cursor: pointer; }
-.btn-preview:hover { background: var(--color-background-tertiary); }
-.preview-box { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-top: 1rem; display: none; }
-.preview-title { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 10px; }
-.preview-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.8; white-space: pre-wrap; font-family: var(--font-mono); background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px; max-height: 360px; overflow-y: auto; }
-.btn-copy { padding: 8px 18px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); font-size: 13px; font-weight: 500; color: var(--color-text-primary); cursor: pointer; margin-top: 10px; }
-.btn-copy:hover { background: var(--color-background-secondary); }
-.copied { color: var(--color-text-success) !important; }
-.photo-note { font-size: 11px; color: var(--color-text-tertiary); margin-top: 6px; }
+  /* Actions */
+  .btn-generate { width: 100%; margin-top: 1rem; padding: 11px; background: #1a1a1a; border: none; border-radius: 10px; font-size: 14px; font-weight: 500; color: #fff; cursor: pointer; transition: opacity 0.15s; }
+  .btn-generate:hover { opacity: 0.85; }
+
+  /* Preview */
+  .preview-box { background: #fff; border: 0.5px solid #e0e0d8; border-radius: 12px; padding: 1.25rem; margin-top: 1rem; display: none; }
+  .preview-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .preview-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.06em; }
+  .preview-text { font-size: 13px; color: #1a1a1a; line-height: 1.8; white-space: pre-wrap; font-family: 'Courier New', monospace; background: #f8f8f4; border: 0.5px solid #e8e8e0; border-radius: 8px; padding: 12px; max-height: 380px; overflow-y: auto; }
+  .photo-note { font-size: 11px; color: #aaa; margin-top: 8px; display: none; }
+  .btn-copy { margin-top: 10px; padding: 8px 20px; background: #fff; border: 0.5px solid #d0d0c8; border-radius: 8px; font-size: 13px; font-weight: 500; color: #444; cursor: pointer; transition: all 0.15s; }
+  .btn-copy:hover { background: #f0f0ea; }
+  .btn-copy.copied { color: #4a7c59; border-color: #4a7c59; }
+
+  footer { text-align: center; font-size: 12px; color: #ccc; margin-top: 2rem; }
 </style>
-
-<div class="wrap">
+</head>
+<body>
+<div class="container">
+  <h1>Rishta Profile Form</h1>
 
   <!-- Photo -->
   <div class="photo-section">
-    <div class="photo-circle" onclick="document.getElementById('photoInput').click()">
-      <img id="photoPreview" alt="Profile photo" />
-      <span class="photo-icon" id="photoIcon">👤</span>
+    <div class="photo-circle" id="photoCircle" onclick="document.getElementById('photoInput').click()">
+      <img id="photoPreview" alt="Profile" />
+      <span id="photoIcon">👤</span>
     </div>
     <div class="photo-info">
-      <p>Add a profile photo (optional). It will be shown above your message for quick identification.</p>
+      <p>Add a profile photo (optional). It will be sent separately with your WhatsApp message.</p>
       <button class="btn-upload" onclick="document.getElementById('photoInput').click()">Choose photo</button>
       <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="handlePhoto(event)" />
       <div class="photo-name" id="photoName"></div>
     </div>
   </div>
 
-  <!-- Personal -->
+  <!-- 1. Personal -->
   <div class="section">
     <div class="section-title"><span class="section-num">1</span> Personal information</div>
     <div class="grid3">
@@ -86,7 +103,7 @@
     </div>
   </div>
 
-  <!-- Education -->
+  <!-- 2. Education -->
   <div class="section">
     <div class="section-title"><span class="section-num">2</span> Education</div>
     <div class="grid2">
@@ -98,14 +115,14 @@
       <div class="course-list" id="courseList">
         <div class="course-item">
           <input type="text" placeholder="e.g. AWS Certified Developer" />
-          <button class="btn-remove" onclick="removeCourse(this)" title="Remove">×</button>
+          <button class="btn-remove" onclick="removeCourse(this)">×</button>
         </div>
       </div>
       <button class="btn-add" onclick="addCourse()">+ Add another course or qualification</button>
     </div>
   </div>
 
-  <!-- Occupation -->
+  <!-- 3. Occupation -->
   <div class="section">
     <div class="section-title"><span class="section-num">3</span> Occupation</div>
     <div class="toggle-row">
@@ -113,7 +130,7 @@
         <input type="checkbox" id="noJobToggle" onchange="toggleJob(this)" />
         <span class="slider-t"></span>
       </label>
-      <label for="noJobToggle" style="cursor:pointer;">Currently not employed / student / house person</label>
+      <span onclick="document.getElementById('noJobToggle').click()">Currently not employed / student / house person</span>
     </div>
     <div id="jobFields" class="grid2">
       <div class="field"><label>Job / Business</label><input id="job" placeholder="e.g. Yarn Broker, Software Engineer" /></div>
@@ -124,7 +141,7 @@
     </div>
   </div>
 
-  <!-- Religion -->
+  <!-- 4. Religion -->
   <div class="section">
     <div class="section-title"><span class="section-num">4</span> Religion</div>
     <div class="grid3">
@@ -134,7 +151,7 @@
     </div>
   </div>
 
-  <!-- Residence -->
+  <!-- 5. Residence -->
   <div class="section">
     <div class="section-title"><span class="section-num">5</span> Residence</div>
     <div class="grid3">
@@ -146,7 +163,7 @@
     </div>
   </div>
 
-  <!-- Family -->
+  <!-- 6. Family -->
   <div class="section">
     <div class="section-title"><span class="section-num">6</span> Family</div>
     <div class="grid2">
@@ -157,7 +174,7 @@
     </div>
   </div>
 
-  <!-- Requirements -->
+  <!-- 7. Requirements -->
   <div class="section">
     <div class="section-title"><span class="section-num">7</span> Requirements (rishta)</div>
     <div class="grid3">
@@ -170,138 +187,106 @@
     </div>
   </div>
 
-  <div class="actions">
-    <button class="btn-preview" onclick="generatePreview()">Generate WhatsApp message ↓</button>
-  </div>
+  <button class="btn-generate" onclick="generatePreview()">Generate WhatsApp message ↓</button>
 
   <div class="preview-box" id="previewBox">
-    <div class="preview-title">WhatsApp message preview</div>
+    <div class="preview-header">
+      <span class="preview-label">WhatsApp message preview</span>
+    </div>
     <div class="preview-text" id="previewText"></div>
-    <p class="photo-note" id="photoNote" style="display:none;">📎 Photo will be sent separately as an image.</p>
+    <p class="photo-note" id="photoNote">📎 Remember to send your photo separately as an image on WhatsApp.</p>
     <button class="btn-copy" id="copyBtn" onclick="copyText()">Copy message</button>
   </div>
+
+  <footer>Rishta Profile Form &mdash; built for personal use</footer>
 </div>
 
 <script>
-function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
-function line(emoji, label, val) { if (!val) return ''; return `${emoji} *${label}:* ${val}\n`; }
+  function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+  function line(emoji, label, val) { if (!val) return ''; return emoji + ' *' + label + ':* ' + val + '\n'; }
 
-function handlePhoto(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    const img = document.getElementById('photoPreview');
-    img.src = ev.target.result;
-    img.style.display = 'block';
-    document.getElementById('photoIcon').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-  document.getElementById('photoName').textContent = file.name;
-}
-
-function toggleJob(cb) {
-  document.getElementById('jobFields').style.display = cb.checked ? 'none' : 'grid';
-  document.getElementById('noJobFields').style.display = cb.checked ? 'block' : 'none';
-}
-
-function addCourse() {
-  const list = document.getElementById('courseList');
-  const item = document.createElement('div');
-  item.className = 'course-item';
-  item.innerHTML = `<input type="text" placeholder="e.g. Google Project Management Certificate" /><button class="btn-remove" onclick="removeCourse(this)" title="Remove">×</button>`;
-  list.appendChild(item);
-  item.querySelector('input').focus();
-}
-
-function removeCourse(btn) {
-  const list = document.getElementById('courseList');
-  if (list.children.length === 1) { btn.closest('.course-item').querySelector('input').value = ''; return; }
-  btn.closest('.course-item').remove();
-}
-
-function getCourses() {
-  return Array.from(document.querySelectorAll('#courseList .course-item input'))
-    .map(i => i.value.trim()).filter(Boolean);
-}
-
-function generatePreview() {
-  const noJob = document.getElementById('noJobToggle').checked;
-  const courses = getCourses();
-  const hasPhoto = document.getElementById('photoPreview').style.display === 'block';
-
-  let eduBlock = [
-    line('🎓', 'Qualification', v('edu')),
-    line('📚', 'Field', v('field_edu')),
-  ].filter(Boolean).join('');
-
-  if (courses.length) {
-    eduBlock += `📜 *Courses / Extra Qualifications:*\n`;
-    courses.forEach((c, i) => { eduBlock += `   ${i+1}. ${c}\n`; });
+  function handlePhoto(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const img = document.getElementById('photoPreview');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      document.getElementById('photoIcon').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+    document.getElementById('photoName').textContent = file.name;
   }
 
-  const occBlock = noJob
-    ? line('🔍', 'Current Status', v('noJobStatus'))
-    : [line('💼', 'Job / Business', v('job')), v('income') ? line('💰', 'Income', v('income')) : ''].filter(Boolean).join('');
+  function toggleJob(cb) {
+    document.getElementById('jobFields').style.display = cb.checked ? 'none' : 'grid';
+    document.getElementById('noJobFields').style.display = cb.checked ? 'block' : 'none';
+  }
 
-  const sections = [
-    ['1️⃣', 'PERSONAL INFORMATION', [
-      line('👤', 'Name', v('name')),
-      line('⚧', 'Gender', v('gender')),
-      line('🎂', 'Age', v('age') ? v('age') + ' years' : ''),
-      line('💍', 'Marital Status', v('marital')),
-      line('📏', 'Height', v('height')),
-    ].filter(Boolean).join('')],
-    ['2️⃣', 'EDUCATION DETAILS', eduBlock],
-    ['3️⃣', 'OCCUPATION DETAIL', occBlock],
-    ['4️⃣', 'RELIGION DETAILS', [
-      line('🕌', 'Religion', v('religion')),
-      line('📿', 'Sect', v('sect')),
-      line('🏷️', 'Cast', v('caste')),
-    ].filter(Boolean).join('')],
-    ['5️⃣', 'RESIDENCE DETAILS', [
-      line('🏠', 'Home', v('home') + (v('propsize') ? ' — ' + v('propsize') : '')),
-      line('📍', 'City', v('city')),
-      line('🗺️', 'Area', v('area')),
-      line('🌍', 'Nationality', v('nationality')),
-    ].filter(Boolean).join('')],
-    ['6️⃣', 'FAMILY DETAILS', [
-      line('👨', "Father's Job", v('father')),
-      line('👩', "Mother's Job", v('mother')),
-      v('brothers') ? line('👦', 'Brothers', v('brothers')) : '',
-      v('sisters') ? line('👧', 'Sisters', v('sisters')) : '',
-    ].filter(Boolean).join('')],
-    ['7️⃣', 'YOUR REQUIREMENTS', [
-      line('📅', 'Age Limit', v('req_age')),
-      line('📐', 'Height', v('req_height')),
-      line('🏙️', 'City', v('req_city')),
-      line('🏷️', 'Cast', v('req_cast')),
-      line('🎓', 'Qualification', v('req_edu')),
-      v('req_other') ? line('📋', 'Other', v('req_other')) : '',
-    ].filter(Boolean).join('')],
-  ];
+  function addCourse() {
+    const list = document.getElementById('courseList');
+    const item = document.createElement('div');
+    item.className = 'course-item';
+    item.innerHTML = '<input type="text" placeholder="e.g. Google Project Management Certificate" /><button class="btn-remove" onclick="removeCourse(this)">×</button>';
+    list.appendChild(item);
+    item.querySelector('input').focus();
+  }
 
-  let msg = sections.filter(([,, body]) => body.trim()).map(([num, title, body]) => `${num} *${title}*\n${body}`).join('\n');
+  function removeCourse(btn) {
+    const list = document.getElementById('courseList');
+    if (list.children.length === 1) { btn.closest('.course-item').querySelector('input').value = ''; return; }
+    btn.closest('.course-item').remove();
+  }
 
-  if (!msg.trim()) msg = 'Fill in the form above to generate your message.';
+  function getCourses() {
+    return Array.from(document.querySelectorAll('#courseList .course-item input'))
+      .map(i => i.value.trim()).filter(Boolean);
+  }
 
-  document.getElementById('previewText').textContent = msg.trim();
-  const note = document.getElementById('photoNote');
-  note.style.display = hasPhoto ? 'block' : 'none';
-  const box = document.getElementById('previewBox');
-  box.style.display = 'block';
-  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  document.getElementById('copyBtn').textContent = 'Copy message';
-  document.getElementById('copyBtn').classList.remove('copied');
-}
+  function generatePreview() {
+    const noJob = document.getElementById('noJobToggle').checked;
+    const courses = getCourses();
+    const hasPhoto = document.getElementById('photoPreview').style.display === 'block';
 
-function copyText() {
-  const text = document.getElementById('previewText').textContent;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('copyBtn');
-    btn.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy message'; btn.classList.remove('copied'); }, 2000);
-  });
-}
+    let eduBlock = [line('🎓','Qualification', v('edu')), line('📚','Field', v('field_edu'))].filter(Boolean).join('');
+    if (courses.length) { eduBlock += '📜 *Courses / Extra Qualifications:*\n'; courses.forEach((c,i) => { eduBlock += '   ' + (i+1) + '. ' + c + '\n'; }); }
+
+    const occBlock = noJob
+      ? line('🔍','Current Status', v('noJobStatus'))
+      : [line('💼','Job / Business', v('job')), v('income') ? line('💰','Income', v('income')) : ''].filter(Boolean).join('');
+
+    const sections = [
+      ['1️⃣','PERSONAL INFORMATION', [line('👤','Name',v('name')),line('⚧','Gender',v('gender')),v('age')?line('🎂','Age',v('age')+' years'):'',line('💍','Marital Status',v('marital')),line('📏','Height',v('height'))].filter(Boolean).join('')],
+      ['2️⃣','EDUCATION DETAILS', eduBlock],
+      ['3️⃣','OCCUPATION DETAIL', occBlock],
+      ['4️⃣','RELIGION DETAILS', [line('🕌','Religion',v('religion')),line('📿','Sect',v('sect')),line('🏷️','Cast',v('caste'))].filter(Boolean).join('')],
+      ['5️⃣','RESIDENCE DETAILS', [line('🏠','Home',v('home')+(v('propsize')?' — '+v('propsize'):'')),line('📍','City',v('city')),line('🗺️','Area',v('area')),line('🌍','Nationality',v('nationality'))].filter(Boolean).join('')],
+      ['6️⃣','FAMILY DETAILS', [line('👨',"Father's Job",v('father')),line('👩',"Mother's Job",v('mother')),v('brothers')?line('👦','Brothers',v('brothers')):'',v('sisters')?line('👧','Sisters',v('sisters')):''].filter(Boolean).join('')],
+      ['7️⃣','YOUR REQUIREMENTS', [line('📅','Age Limit',v('req_age')),line('📐','Height',v('req_height')),line('🏙️','City',v('req_city')),line('🏷️','Cast',v('req_cast')),line('🎓','Qualification',v('req_edu')),v('req_other')?line('📋','Other',v('req_other')):''].filter(Boolean).join('')]
+    ];
+
+    let msg = sections.filter(([,,b]) => b.trim()).map(([n,t,b]) => n+' *'+t+'*\n'+b).join('\n');
+    if (!msg.trim()) msg = 'Fill in the form above to generate your message.';
+
+    document.getElementById('previewText').textContent = msg.trim();
+    document.getElementById('photoNote').style.display = hasPhoto ? 'block' : 'none';
+    const box = document.getElementById('previewBox');
+    box.style.display = 'block';
+    box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('copyBtn').textContent = 'Copy message';
+    document.getElementById('copyBtn').classList.remove('copied');
+  }
+
+  function copyText() {
+    const text = document.getElementById('previewText').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy message'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
+</body>
+</html>
